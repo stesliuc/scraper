@@ -3,6 +3,7 @@ channels:
   - defaults
 dependencies:
   - blas=1.0=mkl
+  - beautifulsoup4
   - bottleneck=1.3.7=py39h7b7cdfe_0
   - brotli=1.0.9=h6c40b1e_8
   - brotli-bin=1.0.9=h6c40b1e_8
@@ -32,6 +33,7 @@ dependencies:
   - libtiff=4.5.1=hcec6c5f_0
   - libwebp-base=1.3.2=h6c40b1e_0
   - llvm-openmp=14.0.6=h0dcd299_0
+  - lxml
   - lz4-c=1.9.4=hcec6c5f_1
   - matplotlib=3.8.4=py39hecd8cb5_0
   - matplotlib-base=3.8.4=py39hb47e01b_0
@@ -53,6 +55,7 @@ dependencies:
   - python=3.9.19=h5ee71fb_0
   - python-dateutil=2.8.2=pyhd3eb1b0_0
   - python-tzdata=2023.3=pyhd3eb1b0_0
+  - pytest
   - pytz=2024.1=py39hecd8cb5_0
   - readline=8.2=hca72f7f_0
   - requests=2.31.0=py39hecd8cb5_1
