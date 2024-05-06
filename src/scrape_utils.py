@@ -1,8 +1,8 @@
-# Function that opens a website ans aves a beautiful soup class
 import requests
 import bs4
 
 
+# Function that opens a website ans aves a beautiful soup class
 def open_site(url):
     site = requests.get(url)
     siteSoup = bs4.BeautifulSoup(site.text, 'html.parser')
