@@ -3,20 +3,61 @@
 # And save the content to a list
 import requests
 import bs4
+import src.graph_utils as grp
+from collections import deque
 
 
-# Function that opens a website ans aves a beautiful soup class
-def open_site(url):
-    site = requests.get(url)
-    siteSoup = bs4.BeautifulSoup(site.text, 'html.parser')
-    return siteSoup
+class Scraper:
+    def __init__(self):
+        self.scraped_graph = grp.Graph()
+
+    def fetch_url(url):
+        try:
+            response = requests.get(url)
+            return response.text
+        except requests.exceptions.RequestException as e:
+            print(f"Failed to fetch {url}: {e}")
+            return None
 
 
-# Function that given a BeautifulSoup website object, returns all the parsed text on the page
-def scrape_text(bs4TextClass, html_obj='p'):
-    content = bs4TextClass.select(html_obj)
-    output = []
-    for item in content:
-        output.append(item.getText())
+    def extract_links(html_content):
+        links = []
+        if html_content:
+            soup = bs4(html_content, 'html.parser')
+            for link in soup.find_all('a'):
+                href = link.get('href')
+                if href and href.startswith('http'):
+                    links.append(href)
+        return links
 
-    return output
+
+    def extract_content(self, html_content, html_element):
+        content = []
+        if html_content:
+            soup = bs4(html_content, 'html.parser')
+            for text in soup.select(html_element):
+                content.append(text.getText())
+        return content
+
+    # Scrape using BFS algorithm to a desired depth
+    def scrape_url(self, url, depth=2, html_element='p'):
+        graph = self.scraped_graph()
+        depth_counter = 0
+        queue = deque([url])
+
+        # Handle neighbors with queue?
+        while queue:
+            vertex = queue.popleft()
+            if vertex not in graph & depth_counter < depth:
+                depth_counter += 1
+                graph.add_node(vertex)
+
+                html = self.fetch_url(url)
+                links  = self.extract_links(html)
+                content = self.extract_content(html, html_element)
+
+            
+
+
+
+
