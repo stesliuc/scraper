@@ -11,14 +11,16 @@ class Graph:
         if not node:
             raise TypeError
         if node not in self.graph:
-            self.graph[node] = []
+            self.graph[node] = {'edges': [],
+                                'content': []}
 
     def add_edge(self, from_node, to_node):
         # Check that the from node is not None
         self.add_node(from_node)
         # If To node isn't already connected, create edge
-        if to_node not in self.graph[from_node]:
-            self.graph[from_node].append(to_node)
+        if to_node not in self.graph[from_node]['edges']:
+            self.graph[from_node]['edges'].append(to_node)
 
     def get_edges(self, node):
-        return self.graph.get(node, [])
+        return self.graph.get(node, {'edges': [],
+                                     'content': []})
