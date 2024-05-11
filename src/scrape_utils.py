@@ -1,3 +1,6 @@
+# Script that defines functions to scrape a site given a url
+# This script should allow you to request content from a webbsite
+# And save the content to a list
 import requests
 import bs4
 
