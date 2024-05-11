@@ -23,4 +23,8 @@ class Graph:
 
     def get_edges(self, node):
         return self.graph.get(node, {'edges': [],
-                                     'content': []})
+                                     'content': []})['edges']
+
+    def add_content(self, node, content):
+        if not node:
+            self.graph[node]['content'].append(content)
