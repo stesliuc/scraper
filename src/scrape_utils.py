@@ -19,7 +19,6 @@ class Scraper:
             print(f"Failed to fetch {url}: {e}")
             return None
 
-
     def extract_links(html_content):
         links = []
         if html_content:
@@ -29,7 +28,6 @@ class Scraper:
                 if href and href.startswith('http'):
                     links.append(href)
         return links
-
 
     def extract_content(self, html_content, html_element):
         content = []
@@ -45,7 +43,6 @@ class Scraper:
         depth_counter = 0
         queue = deque([url])
 
-        # Handle neighbors with queue?
         while queue:
             vertex = queue.popleft()
             if vertex not in graph & depth_counter < depth:
@@ -53,10 +50,15 @@ class Scraper:
                 graph.add_node(vertex)
 
                 html = self.fetch_url(url)
-                links  = self.extract_links(html)
+                links = self.extract_links(html)
                 content = self.extract_content(html, html_element)
 
-            
+                graph.add_edges(vertex, links)
+                graph.add_content(vertex, content)
+
+                for neighbor in graph.get_edges(vertex):
+                    if neighbor not in graph:
+                        queue.append(neighbor)
 
 
 

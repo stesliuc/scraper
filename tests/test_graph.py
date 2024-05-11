@@ -45,7 +45,7 @@ def test_add_content(graph):
     graph.add_node('A')
     graph.graph['A']['content'].append("Test string")
     graph.add_edge('A', 'B')
-    assert graph.graph['A']['content'][0] == "Test string", "Content being changed with edge adding"
+    assert graph.graph['A']['content'][0] == "Test string", "Edg changed cntnt"
 
 
 def test_invalid_input(graph):
