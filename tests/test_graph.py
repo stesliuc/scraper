@@ -10,8 +10,8 @@ def graph():
 
 def test_add_node(graph):
     graph.add_node('A')
-    assert len(graph.graph['A']['edges']) == 0, "Single node edge set failed"
-    assert len(graph.graph['A']['content']) == 0, "Single node content set failed"
+    assert len(graph.get_edges('A')) == 0, "Single node edge set failed"
+    assert len(graph.get_content('A')) == 0, "Single node content set failed"
 
 
 def test_add_edge(graph):
@@ -43,9 +43,9 @@ def test_add_nonexistent_node(graph):
 
 def test_add_content(graph):
     graph.add_node('A')
-    graph.graph['A']['content'].append("Test string")
+    graph.add_content('A', "Test string")
     graph.add_edge('A', 'B')
-    assert graph.graph['A']['content'][0] == "Test string", "Edg changed cntnt"
+    assert graph.get_content('A')[0] == "Test string", "Edg changed cntnt"
 
 
 def test_invalid_input(graph):

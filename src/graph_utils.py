@@ -3,6 +3,7 @@
 # Add nodes and edges to it
 # And define some method of traversing the graph
 
+
 class Graph:
     def __init__(self):
         self.graph = {}
@@ -25,6 +26,10 @@ class Graph:
         return self.graph.get(node, {'edges': [],
                                      'content': []})['edges']
 
+    def get_content(self, node):
+        return self.graph.get(node, {'edges': [],
+                                     'content': []})['content']
+
     def add_content(self, node, content):
-        if not node:
+        if node:
             self.graph[node]['content'].append(content)

@@ -10,6 +10,7 @@ dependencies:
   - ca-certificates=2024.3.11=hecd8cb5_0
   - certifi=2024.2.2=py39hecd8cb5_0
   - charset-normalizer=2.0.4=pyhd3eb1b0_0
+  - collections
   - contourpy=1.2.0=py39ha357a0b_0
   - cycler=0.11.0=pyhd3eb1b0_0
   - fonttools=4.51.0=py39h6c40b1e_0
