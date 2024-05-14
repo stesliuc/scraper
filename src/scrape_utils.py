@@ -16,42 +16,43 @@ class Scraper:
             response = requests.get(url)
             return response.text
         except requests.exceptions.RequestException as e:
-            print(f"Failed to fetch {url}: {e}")
+            print("Failed to fetch {url}: {e}")
             return None
 
     def extract_links(self, html_content):
         links = []
         if html_content:
-            soup = BeautifulSoup(html_content, 'html.parser')
-            for link in soup.find_all('a'):
-                href = link.get('href')
-                if href and href.startswith('http'):
+            soup = BeautifulSoup(html_content, "html.parser")
+            for link in soup.find_all("a"):
+                href = link.get("href")
+                if href and href.startswith("http"):
                     links.append(href)
         return links
 
     def extract_content(self, html_content, html_element):
         content = []
         if html_content:
-            soup = BeautifulSoup(html_content, 'html.parser')
+            soup = BeautifulSoup(html_content, "html.parser")
             for text in soup.select(html_element):
                 content.append(text.getText())
         return content
 
     # Scrape using BFS algorithm to a desired depth
-    def scrape_url(self, url, depth=2, html_element='p'):
+    def scrape_url(self, url, depth=2, html_element="p"):
         G = self.scraped_graph
         depth_counter = 0
         queue = deque([url])
 
-        # TODO add a visited node hash map in order for this to work with non-tree graphs
+        # TODO add a visited node hash map for non-tree graphs
         while queue:
             n = len(queue)
             for _ in range(n):
                 vertex = queue.popleft()
                 if (vertex not in G.graph) and (depth_counter < depth):
-                    G.add_node(vertex)
-
                     html = self.fetch_url(vertex)
+                    if html is None:
+                        continue
+                    G.add_node(vertex)
                     links = self.extract_links(html)
                     contents = self.extract_content(html, html_element)
 

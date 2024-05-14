@@ -1,5 +1,5 @@
-from src.graph_utils import Graph
 import pytest
+from src.graph_utils import Graph
 
 
 # Use pytest.fixture to instantiate a new Graph class for each test
